@@ -5128,7 +5128,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const environment = {
   production: false,
-  apiUrl: 'https://localhost:7209/api/'
+  apiUrl: 'http://reservio-api.runasp.net/api/'
 };
 
 /***/ }),
