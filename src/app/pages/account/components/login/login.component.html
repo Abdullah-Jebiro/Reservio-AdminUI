@@ -1,0 +1,69 @@
+<div class="container vh-100">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="card login p-0">
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="text-center my-4">
+            <!-- <img src="" alt="">                  Add Logo -->
+            <h2 style="font-weight: bold; font-family: Arial, Helvetica, sans-serif;">مرحباً بك في منصة كورسات <br>جامعة إدلب</h2>
+          </div>
+
+          <p style="color: lightslategray; text-align: center; margin-top: 10px">
+            أدخل معلومات لتسجيل الدخول
+          </p>
+
+          <div class="form-group mb-3 mt-4">
+            <input required type="text" id="email" class="form-control" formControlName="email" />
+            <span class="myPlaceholder px-2">الايميل</span>
+            <i [ngClass]="{
+                isValid: loginForm.get('email')?.valid,
+                isNotValid:
+                  !loginForm.get('email')?.valid &&
+                  loginForm.get('email')?.touched
+              }">
+            </i>
+            <span class="requirements px-2" *ngIf="loginForm.get('email')?.errors?.['required']
+                             && loginForm.get('email')?.dirty ">يجب إدخال الايميل</span>
+            <span class="requirements px-2" *ngIf="loginForm.get('email')?.errors?.['email']
+                             && loginForm.get('email')?.dirty ">الايميل غير صالح</span>
+          </div>
+
+          <div class="form-group my-4">
+            <input required type="password" class="form-control" formControlName="password" />
+            <span class="myPlaceholder px-2">كلمة السر</span>
+            <i [ngClass]="{
+                isValid: loginForm.get('password')?.valid,
+                isNotValid:
+                  !loginForm.get('password')?.valid &&
+                  loginForm.get('password')?.touched
+              }">
+            </i>
+            <span class="requirements px-2" *ngIf="loginForm.get('password')?.errors?.['required'] && 
+                            loginForm.get('password')?.dirty ">يجب إدخال كلمة السر</span>
+          </div>
+
+          <input [disabled]="this.loginForm.invalid" type="submit" class="btn background-MainColor w-100"
+            value="تسجيل الدخول" />
+
+          <div class="text-center m-2" data-bs-toggle="modal" data-bs-target="#ForgotPasswordModal">
+            أو<span class="link m-1">نسيت كلمة السر</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-footer text-right">
+        ليس عندك حساب؟<span class="link m-1" [routerLink]="['../Register']">إنشاء حساب</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ForgotPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-forgot-password></app-forgot-password>
+      </div>
+    </div>
+  </div>
+</div>

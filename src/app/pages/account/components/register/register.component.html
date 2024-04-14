@@ -1,0 +1,149 @@
+<div class="container">
+  <section class="p-2 pt-2 md-2 p-md-5">
+    <div class="card mx-md-5">
+      <div class="text-center my-2">
+        <h2 style="font-weight: bold; font-family: Arial, Helvetica, sans-serif;">مرحباً بك في منصة كورسات <br>جامعة إدلب</h2>
+      </div>
+
+      <p style="color: lightslategray; text-align: center; margin-top: 10px">
+        أدخل معلومات لتسجيل حساب جديد
+      </p>
+      <form class="m-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <label class="fw-bold" for="">أسم المستخدم : </label>
+        <input
+          formControlName="userName"
+          [ngClass]="{ 'is-valid': registerForm.get('userName')?.valid }"
+          type="text"
+          class="form-control mb-3"
+        />
+        <div
+          *ngIf="
+            registerForm.get('userName')?.errors &&
+            registerForm.get('userName')?.dirty
+          "
+          class="alert alert-danger p-1"
+        >
+          <p
+            *ngIf="registerForm.get('userName')?.getError('required')"
+            class="m-0"
+          >
+          يجب إدخال أسم المستخدم
+        </p>
+          <p
+            *ngIf="registerForm.get('userName')?.getError('minlength')"
+            class="m-0"
+          >
+          يجب أن يكون أسم المستخدم أكثر من 6 محارف 
+          </p>
+          <p
+            *ngIf="registerForm.get('userName')?.getError('maxlength')"
+            class="m-0"
+          >
+          يجب أن يكون أسم المستخدم أقل من 20 محرف
+          </p>
+          <p
+            *ngIf="registerForm.get('userName')?.getError('pattern')"
+            class="m-0"
+          >
+            Input must be alphanumeric
+          </p>
+        </div>
+
+        <label class="fw-bold" for="">الايميل : </label>
+        <input
+          formControlName="email"
+          [ngClass]="{ 'is-valid': registerForm.get('email')?.valid }"
+          type="email"
+          class="form-control mb-3"
+        />
+        <div
+          *ngIf="
+            registerForm.get('email')?.errors &&
+            registerForm.get('email')?.dirty
+          "
+          class="alert alert-danger p-1"
+        >
+          <p
+            *ngIf="registerForm.get('email')?.getError('required')"
+            class="m-0"
+          >
+          يجب إدحال الايميل
+        </p>
+          <p *ngIf="registerForm.get('email')?.getError('email')" class="m-0">
+            الايميل غير صالح
+          </p>
+        </div>
+
+        <label class="fw-bold" for="">كلمة السر : </label>
+        <input
+          formControlName="password"
+          [ngClass]="{ 'is-valid': registerForm.get('password')?.valid }"
+          type="password"
+          class="form-control mb-3"
+        />
+        <div
+          *ngIf="
+            registerForm.get('password')?.errors &&
+            registerForm.get('password')?.dirty
+          "
+          class="alert alert-danger p-1"
+        >
+          <p
+            *ngIf="registerForm.get('password')?.getError('required')"
+            class="m-0"
+          >
+          يجب إدخال كلمة السر
+        </p>
+          <p
+            *ngIf="registerForm.get('password')?.getError('pattern')"
+            class="m-0"
+          >
+          كلمة السر يجب أن تكون بين 6-20 محرف تتضمن محارف كبيرة وصغيرة ورموز 
+          </p>
+        </div>
+
+        <label class="fw-bold" for="">تأكيد كلمة السر : </label>
+        <input
+          formControlName="ConfirmPassword"
+          [ngClass]="{ 'is-valid': registerForm.get('ConfirmPassword')?.valid }"
+          type="password"
+          class="form-control mb-3"
+        />
+        <div
+          *ngIf="
+            registerForm.get('ConfirmPassword')?.errors &&
+            registerForm.get('ConfirmPassword')?.dirty
+          "
+          class="alert alert-danger p-1"
+        >
+          <p
+            *ngIf="registerForm.get('ConfirmPassword')?.getError('required')"
+            class="m-0"
+          >
+          يجب إدخال تأكيد كلمة السر
+        </p>
+
+          <p
+            *ngIf="registerForm.get('ConfirmPassword')?.getError('math')"
+            class="m-0"
+          >
+          كلمة السر وتأكيدها غير متطابقين
+        </p>
+        </div>
+
+        <button
+          [disabled]="this.registerForm.invalid"
+          type="submit"
+          class="btn background-MainColor w-100"
+        >
+          <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+          <span *ngIf="!isLoading">تسجيل الحساب</span>
+        </button>
+      </form>
+      <div class="card-footer text-right">
+        هل لديك بالفعل حساب ؟
+        <span class="link m-1" [routerLink]="['../Login']">تسجيل الدخول</span>
+      </div>
+    </div>
+  </section>
+</div>

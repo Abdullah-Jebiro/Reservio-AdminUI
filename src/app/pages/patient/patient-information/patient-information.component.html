@@ -1,0 +1,42 @@
+<div *ngIf="isModalOpen">
+  <ngx-patient-information-form (closeModal)="closeModal()"></ngx-patient-information-form>
+</div>
+
+<div class="card" *ngIf="!isModalOpen">
+  <div class="card-header">
+    <button class="openModal" (click)="openModal()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive background-table">
+      <table class="table table-light table-hover" id="table-paginate">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Size</th>
+            <th>Description</th>
+            <th>Date Time</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let information of patientInformation">
+            <td>{{ information.attachedFileName }}</td>
+            <td>{{ information.attachedFileSize }}</td>
+            <td>{{ information.description }}</td>
+            <td>{{ information.dateTime | date }}</td>
+            <td>
+              <i class="fas fa-trash-alt" (click)="deleteInformation(information.informationId)"></i>
+            </td>
+            <td>
+              <i class="fas fa-download" (click)="downloadFile(information.attachedFilePath, information.attachedFileName)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
