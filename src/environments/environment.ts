@@ -10,7 +10,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://reservio-api.runasp.net/api/',
+  apiUrl: 'https://localhost:7209/api/',
 
 };
 
